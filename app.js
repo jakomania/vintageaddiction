@@ -4,11 +4,7 @@ const port = 3000;
     
 //create a server object:
 http.createServer( (req, res) => {
-
-
     
-
-    //const cookie = JSON.stringify({user: 'jacob', pass: 'cisco', favRomm: '4'});
 
     res.writeHead(200, {
         //"Set-Cookie": `${cookie}`,
@@ -30,6 +26,10 @@ http.createServer( (req, res) => {
     else if(url ==='/register')
     {
         routes.renderRegister(req, res);
+    }
+    else if(url ==='/dashboard')
+    {
+        routes.renderDashboard(req, res);
     }
     else
     {                  

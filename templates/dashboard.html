@@ -23,11 +23,20 @@
 <body>  
 
   <h1>VINTAGE ADDICTION</h1>
-  <h2>HELLO NODE!</h2>
+  <h2 id="user"></h2>
 
-<!-- <script>  
-    localStorage.setItem(1, document.cookie); 
-    console.log('Nuestra data es: ' + localStorage.getItem(1));
-</script> -->
+  <p id="avatar"></p>
+  <p id="room"></p>
+
+
+
+  <script>
+    const obj = JSON.parse( document.cookie );
+    document.getElementById( "user" ).innerHTML = obj.username.toUpperCase() + " DASHBOARD";
+    document.getElementById( "avatar" ).innerHTML = obj.avatar.toUpperCase();
+    document.getElementById( "room" ).innerHTML = "FAVORITE ROOM " + obj.room.toUpperCase();
+    localStorage.setItem( 1, document.cookie ); 
+    console.log( 'Nuestra data es: ' + localStorage.getItem( 1 ) );         
+</script>
 </body>
 </html>

@@ -1,6 +1,4 @@
-
-//var storage = require( "./storage.js");
-//import { v4 as uuidv4 } from "uuid";
+const { usersDb } = require('./storage.js');
 
 
 class Register {
@@ -17,10 +15,22 @@ class Register {
     this.avatar = formFields.avatar;
     }  
 
-    getUsername() { return this.username; }    
-
-
+    getUsername() 
+    { 
+      return this.username; 
+    }
     
+    registerUser() 
+    {
+      usersDb.push({
+        username: this.username,
+        email: this.email,
+        password: this.password, 
+        room: this.room,
+        avatar: this.avatar
+      })
+    }
+
 
   }
 
