@@ -7,16 +7,13 @@ const { usersDb } = require('./storage.js');
 
 module.exports = {
   
-
-  //Test cookie
-  //cookie: JSON.stringify({user: 'jacob', pass: 'cisco', favRomm: '4'}),  
-
+  //Home route
   renderHome: function ( req, res )
   {    
     fs.readFile( 'templates/index.html', ( err, data ) => 
     {
       if ( err ) {
-        const msgError = "Error al cargar la pagina"
+        const msgError = "Home load error"
         console.log( msgError );
         res.end( msgError )
         return;
@@ -24,7 +21,6 @@ module.exports = {
       res.end( data )
     } )
   },
-
 
   //Login route
   renderLogin: function ( req, res )
@@ -36,7 +32,7 @@ module.exports = {
         {
           if ( err ) 
           {
-            const msgError = "Error al cargar el login"
+            const msgError = "Login load error"
             console.log( msgError );
             res.end( msgError )
             return;
@@ -65,7 +61,7 @@ module.exports = {
               {
                 if ( err ) 
                 {
-                  const msgError = "Error al cargar el dashboard"
+                  const msgError = "Dashboard load error"
                   console.log( msgError );
                   res.end( msgError );        
                   return;
@@ -80,8 +76,11 @@ module.exports = {
                   //res.write( data );
                   res.end( data );
                 };          
-              })
-                       
+              })                       
+            }
+            else 
+            {
+              res.end( 'Authentication fail!')
             }
            
         });
@@ -98,7 +97,7 @@ module.exports = {
       {
         if ( err ) 
         {
-          const msgError = "Error al cargar el registro"
+          const msgError = "Registry load error"
           console.log( msgError );
           res.end( msgError );        
           return;
@@ -119,41 +118,31 @@ module.exports = {
       req.on('end', () => 
       {
           console.log( parse( body ) );
-          var register = new Register( parse( body ) );
-          register.registerUser();
-          console.log(
-            'User ' 
-            +  usersDb[ usersDb.length -1 ].username 
-            + ' has been registered'            
-            );
-          res.end( 'ok' );
+          let register = new Register( parse( body ) );          
+          let exists = register.checkEmail();
+          if ( !exists )
+          {
+            register.registerUser();          
+            res.end( 'User registered!' );
+          }
+          else 
+          {
+            res.end( 'User email already registerd' );
+          }          
       });    
     } 
   },  
 
-  parseTemplate: function ( template )
-  {    
-    fs.readFile( 
-      template, ( err, data ) => 
-      {
-        if ( err ) {
-          const msgError = "Error al parsear html"
-          console.log( msgError );                  
-        }            
-        console.log(data);
-      } )
-  },
+}         
 
+  
 
-  sumarDigitos: function (a, b)
-  {
-    return a + b;
-  }
+  
 
 
   
 
-}
+
 
 
 

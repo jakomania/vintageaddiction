@@ -6,38 +6,37 @@ const port = 3000;
 http.createServer( (req, res) => {
     
 
-    res.writeHead(200, {
-        //"Set-Cookie": `${cookie}`,
+    res.writeHead(200, {        
         "Content-Type": `text/html`
     });
 
     var url = req.url;
 
-    if(url ==='/about')
+    if( url ==='/about' )
     {                
-        res.write('<h1>about us page<h1>');                 
-        res.end(); 
+        res.write( '<h1>about us page<h1>' );                 
+        res.end( ); 
     }
 
-    else if(url ==='/login')
+    else if( url ==='/login' )
     {
-        routes.renderLogin(req, res);        
+        routes.renderLogin( req, res );        
     }
-    else if(url ==='/register')
+    else if( url ==='/register' )
     {
-        routes.renderRegister(req, res);
+        routes.renderRegister( req, res );
     }
-    else if(url ==='/dashboard')
+    else if( url ==='/dashboard' && req.method === 'POST' )
     {
-        routes.renderDashboard(req, res);
+        routes.renderDashboard( req, res );
     }
     else
     {                  
-        routes.renderHome(req, res);        
+        routes.renderHome( req, res );        
     }
     }).listen(port, () => 
         {
-            console.log(`Server running at port ${port}`); 
+            console.log( `Server running at port ${port}` ); 
         });
 
 
