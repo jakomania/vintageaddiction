@@ -12,7 +12,11 @@ http.createServer( (req, res) => {
 
     var url = req.url;
 
-    if( url ==='/about' )
+    if ( url.match( ".png$" ) ) 
+    {
+        routes.renderPng( res, req, url );
+    }
+    else if( url ==='/about' )
     {                
         res.write( '<h1>about us page<h1>' );                 
         res.end( ); 

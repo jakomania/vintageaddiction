@@ -6,6 +6,25 @@ const { Login } = require('./Login.js');
 const { usersDb } = require('./storage.js');
 
 module.exports = {
+
+
+  
+
+  renderPng: function ( res, req, url )
+  {    
+    fs.readFile( `img/${ url }`, ( err, data ) =>
+    {
+      if ( err ) 
+      {
+        const msgError = "Image load error"
+        console.log( msgError );
+        res.end( msgError )
+        return;
+      }      
+      res.end( data )
+    } )
+  },
+
   
   //Home route
   renderHome: function ( req, res )
@@ -72,8 +91,7 @@ module.exports = {
                     200, {
                     "Set-Cookie": `${cookie}`,
                     "Content-Type": `text/html`
-                    });     
-                  //res.write( data );
+                    });                       
                   res.end( data );
                 };          
               })                       
@@ -103,7 +121,7 @@ module.exports = {
           return;
         } 
         else 
-        { 
+        {           
           res.end( data );
         };          
       })
