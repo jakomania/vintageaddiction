@@ -1,44 +1,18 @@
-var routes = require('./src/js/routes.js');
-const http = require('http');
-const port = 3000;    
-    
-//create a server object:
-http.createServer( (req, res) => {
-    
+var server = require("./server");
+var router = require("./router");
+var requestHandlers = require("./src/controler/requesthandler");
 
-    res.writeHead(200, {        
-        "Content-Type": `text/html`
-    });
+var handle = {};
+handle["/"] = requestHandlers.init;
+handle["/home"] =requestHandlers.init;
+handle["/register"]=requestHandlers.register;
+handle["/login"]=requestHandlers.login;
+handle["/game-app"]=requestHandlers.gameApp;
+handle["/validated-register"]=requestHandlers.validatedRegister;
+handle["/assets/avatars"]= requestHandlers.serveImg;
+handle["/ocupation"]= requestHandlers.ocupation;
+handle["/disconnect"]= requestHandlers.disconnect;
+handle["/ocupationcheck"]= requestHandlers.ocupationcheck;
+handle["/logOut"] = requestHandlers.logOut;
 
-    var url = req.url;
-
-    if( url ==='/about' )
-    {                
-        res.write( '<h1>about us page<h1>' );                 
-        res.end( ); 
-    }
-
-    else if( url ==='/login' )
-    {
-        routes.renderLogin( req, res );        
-    }
-    else if( url ==='/register' )
-    {
-        routes.renderRegister( req, res );
-    }
-    else if( url ==='/dashboard' && req.method === 'POST' )
-    {
-        routes.renderDashboard( req, res );
-    }
-    else
-    {                  
-        routes.renderHome( req, res );        
-    }
-    }).listen(port, () => 
-        {
-            console.log( `Server running at port ${port}` ); 
-        });
-
-
-
-
+server.init(router.route, handle);

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vintage Addiction</title>
+    </head>
+    <body>
+        <h1>VINTAGE ADDICTION</h1>
+        <div class="wrapper-main">
+            <div class="wrapper-content">
+                <div id="helper" class="helper-wrapper">
+                    <div class="helper-content">
+                        <p>The username or password is incorrect or the user doesnt exists</p>
+                    </div>
+                </div>
+
+                <!--<form action="/game-app" method="post">-->
+                <div class="mb-3 row">
+                    <label for="email" class="col-sm-2 col-form-label text-light">Email</label>
+                    <div class="col-sm-9 px-4">
+                        <input type="text" class="form-control" id="email" name="email">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="password" class="col-sm-2 col-form-label text-light">Password</label>
+                    <div class="col-sm-9 px-4">
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                </div>
+                <div class="d-grid gap-2">
+                    <button id="login" class="btn btn-primary btn btn-outline-warning">Log in</button>
+                </div>
+
+                <div>
+                    <div class="wrapper-register">
+                        <p>Don't have account? <a href="/register">Create one</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+
+            //TODO: THE OK RESPOSE HAVE TO GIVE THE AVATAR URL TO STORE IN LOCALSTORAGE
+
+            var boton = document.querySelector("#login");
+            boton.addEventListener('click', function () {
+
+                var username = document.getElementById('email').value;
+                var password = document.getElementById('password').value;
+
+                fetch('/login', {
+                    method: 'POST',
+                    headers: { 'content-type': 'application/json' },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                }).then(response => {
+                    if (response.ok) {
+                        var user =JSON.parse(localStorage.getItem("User"));
+                        user.isLogged= true;
+                        localStorage.setItem('User', JSON.stringify(user))
+
+                        fetch('/game-app').then(response => {
+                            window.location.assign(response.url)
+                        })
+                    } else {
+                        document.getElementById('helper').style.visibility = "visible"
+                    }
+                })
+            });
+
+        </script>
+    </body>
+</html>

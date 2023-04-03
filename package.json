@@ -1,15 +1,17 @@
 {
-  "name": "juego",
+  "name": "Vintage Addiction",
   "version": "1.0.0",
-  "description": "",
+  "description": "Aplicación Multijugador",
   "main": "app.js",
+  "proxy": "http://localhost:8080",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakomania/vintageaddiction.git"
+  },
+  "author": "JEPJ Team",
   "license": "ISC",
-  "dependencies": {
-    "localStorage": "^1.0.4"
-  }
+  "homepage": "https://github.com/jakomania/vintageaddiction"
 }
