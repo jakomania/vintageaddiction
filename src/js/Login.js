@@ -22,9 +22,9 @@ class Login {
     let user = this.existsUser();
     if ( user && user.password === this.password )
     {      
-      connected_users.push( this.username );
-      console.log("Last logged user is " 
-        + connected_users[ connected_users.length -1] )
+      // connected_users.push( this.username );
+      // console.log("Last logged user is " 
+      //   + connected_users[ connected_users.length -1] )
       return user      
     }
     else

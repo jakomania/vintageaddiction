@@ -4,6 +4,8 @@ const { parse } = require('querystring');
 const { Register } = require('./Register.js')
 const { Login } = require('./Login.js');
 const { usersDb } = require('./storage.js');
+const { Room } = require('./Room.js');
+const { Player } = require('./Player.js');
 
 module.exports = {
 
@@ -151,6 +153,76 @@ module.exports = {
     } 
   },  
 
+  renderRoom: function ( req, res )
+  {
+    let body = '';
+      req.on('data', chunk => 
+      {
+        body += chunk.toString(); // convert Buffer to string
+      }); 
+      req.on(
+        'end', () => 
+        {          
+            let data = parse( body );          
+            var login = new Login( data );
+            var cookie = JSON.stringify( login.loginUser() );
+            console.log(cookie);                                    
+            if ( cookie )
+            {
+              fs.readFile( 
+                'templates/dashboard.html', ( err, data ) => 
+              {
+                if ( err ) 
+                {
+                  const msgError = "Dashboard load error"
+                  console.log( msgError );
+                  res.end( msgError );        
+                  return;
+                } 
+                else 
+                { 
+                  res.writeHead(
+                    200, {
+                    "Set-Cookie": `${cookie}`,
+                    "Content-Type": `text/html`
+                    });                       
+                  res.end( data );
+                };          
+              })                       
+            }
+            else 
+            {
+              res.end( 'Authentication fail!')
+            }
+           
+        });
+    },
+            
+     
+  //Register route
+  renderRoom: function ( req, res )
+  {       
+      let body = '';
+      req.on('data', chunk => 
+      {
+        body += chunk.toString(); // convert Buffer to string
+      }); 
+      req.on('end', () => 
+      {
+          console.log( parse( body ) );
+          let player = new Player( parse( body ) );          
+
+          if ( player.addPlayer2Room() )
+          {
+            res.end( 'Estas dentro de la sala!' );  
+          }
+          else
+          {
+            res.end( 'La sala está completa' );  
+          }
+                                                                      
+      });    
+    } 
 }         
 
   

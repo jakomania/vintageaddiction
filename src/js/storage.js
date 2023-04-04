@@ -5,12 +5,20 @@ usersDb = [
     username: 'admin',
     email: 'admin@gmail.com',
     password: 'cisco',
-    room: '6',
+    room: '1',
     avatar: 'punk05.png'
     },
   ];
 
-connected_users = [];
 
-module.exports = { usersDb, connected_users };
+roomData = {
+   room01: [ 'player1', 'player2'] ,
+   room02: [] ,
+   room03: [] ,
+   room04: [] ,
+}
+
+
+
+module.exports = { usersDb, roomData };
 
