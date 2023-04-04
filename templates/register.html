@@ -37,15 +37,7 @@
         
     
     <h1>VINTAGE ADDICTION</h1>
-    <!-- <form action="/register" method="post">
-        <input type="text" name="username" placeholder="username" /><br />
-        <input type="email" name="email" placeholder="email" /><br />
-        <input type="password" name="pass" placeholder="password" /><br />
-        <input type="number" name="room" placeholder="favorite room" /><br />
-        <input type="text" name="avatar" placeholder="avatar" /><br />                
-        <button>Submit</button>
-    </form> -->
-
+    
 
     <section class="vh-100" >
         <div class="container py-5 h-100">
@@ -54,13 +46,13 @@
               <div class="card shadow-2-strong" style="border-radius: 1rem;">
                 <div class="card-body p-5 text-center">
       
-                  <h3 class="mb-5">Register</h3>
+                  <h3 id="demo" class="mb-5">Register</h3>
                     
-                  <form action="/register" method="post">
+                  <form id="reg_form" action="/register" method="post">
 
                   <div class="form-outline mb-4">
                         <input type="text" name="username" id="username" class="form-control form-control-lg" />
-                        <label class="form-label" for="typeEmailX-2">Email</label>
+                        <label class="form-label" for="typeEmailX-2">Username</label>
                   </div>
 
                   <div class="form-outline mb-4">
@@ -78,26 +70,27 @@
                     <label class="form-label" for="typePasswordX-2">Favorite room</label>
                   </div>                  
 
-                  <!-- <div class="form-outline mb-4">
-                    <input type="text" name="avatar" id="avatar" class="form-control form-control-lg" />
-                    <label class="form-label" for="typePasswordX-2">Avatar</label>
-                  </div>                   -->
+                  
+                    <input type="hidden" name="avatar" id="avatar" />
+                  
+                  
                   <div class="col-sm">
                     <label>Choose Avatar</label>    
-                    <div id="registerAvatar" class="d-flex flex-wrap justify-content-space-between">                        
-                        <img id="t1"  src="punk01.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
-                        <img id="t2"  src="punk02.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
-                        <img id="t3"  src="punk03.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
-                        <img id="t4"  src="punk04.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
-                        <img id="t5"  src="punk05.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
-                        <img id="t6"  src="punk06.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
-                        <img id="t7"  src="punk07.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
-                        <img id="t8"  src="punk08.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />                        
+                    <div id="registerAvatar" class="d-flex flex-wrap justify-content-space-between">                            
+                        <img id="t1" name="avatars" onclick="getAvatar('t1')" src="punk01.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
+                        <img id="t2" name="avatars" onclick="getAvatar('t2')" src="punk02.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
+                        <img id="t3" name="avatars" onclick="getAvatar('t3')" src="punk03.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
+                        <img id="t4" name="avatars" onclick="getAvatar('t4')" src="punk04.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
+                        <img id="t5" name="avatars" onclick="getAvatar('t5')" src="punk05.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
+                        <img id="t6" name="avatars" onclick="getAvatar('t6')" src="punk06.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
+                        <img id="t7" name="avatars" onclick="getAvatar('t7')" src="punk07.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
+                        <img id="t8" name="avatars" onclick="getAvatar('t8')" src="punk08.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />                        
                     </div>
                 </div>
                 <br>
 
                   <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>  
+                  
                 </form>                                            
       
                 </div>
@@ -108,18 +101,56 @@
       </section>
 
 
+
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-  </body>  
+
+<script>
+
+const form = document.getElementById('reg_form');
+
+// form.addEventListener('submit', (event) => 
+// {
+//     // stop form submission
+//     event.preventDefault();
+//     console.log(form.elements['username'].value);
+//     console.log(form.elements['email'].value);
+//     console.log(form.elements['room'].value);
+//     console.log(form.elements['avatar'].value);
+
+// });
+
+
+function getAvatar(id) 
+{   
+    const avatars = document.getElementsByName("avatars");
+
+    avatars.forEach( avatar => 
+    {        
+        avatar.classList.remove('selected');
+    }
+
+    );    
+
+    var element = document.getElementById(id);
+    
+    element.classList.add("selected");
+
+    form.elements['avatar'].value = element.src;
+    
+}
+
+</script>
+
+</body>  
 </html>
 
-<style>
-    .center {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 500px;  
-    }
+<style>  
+
+.selected {
+    border: dashed 3px red;
+}
     
     body {
       background-color: lightgreen;

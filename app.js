@@ -21,7 +21,6 @@ http.createServer( (req, res) => {
         res.write( '<h1>about us page<h1>' );                 
         res.end( ); 
     }
-
     else if( url ==='/login' )
     {
         routes.renderLogin( req, res );        
@@ -33,6 +32,10 @@ http.createServer( (req, res) => {
     else if( url ==='/dashboard' && req.method === 'POST' )
     {
         routes.renderDashboard( req, res );
+    }
+    else if( url ==='/room' && req.method === 'POST' )
+    {                
+        routes.renderRoom( req, res );
     }
     else
     {                  

@@ -6,7 +6,7 @@ usersDb = [
     email: 'admin@gmail.com',
     password: 'cisco',
     room: '6',
-    avatar: 'bat'
+    avatar: 'punk05.png'
     },
   ];
 
