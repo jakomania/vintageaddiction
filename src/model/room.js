@@ -1,4 +1,4 @@
-const User = require('./Player')
+const User = require('./player')
 
 module.exports = class Room {
     constructor(number, name, player1, player2) {

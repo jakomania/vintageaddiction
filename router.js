@@ -1,4 +1,4 @@
-//Funciones básicas de mapeo
+/** Funciones básicas de mapeo **/
 
 function route(handle, pathname, response, postData, idpath){
     console.log("starting to route a request to: " + pathname);

@@ -1,7 +1,7 @@
 var http = require("http");
 var url = require("url");
 
-// Inicialización del servidor
+/** Inicialización del servidor **/
 function init(route, handle){
     function onRequest(request, response){
         var pathname = url.parse(request.url).pathname;

@@ -122,8 +122,130 @@ function logOut(response, postData, idpath){
   })
 }
 
+function gameApp(response) {
+  fs.readFile("public/views/game-app.html", function (err, data) {
+    if (err) {
+      throw err;
+    }
+
+    response.writeHead(200, { "Content-Type": "text/html" });
+    response.write(data);
+    response.end();
+  })
+}
+
+function disconnect(response, postData, idpath) {
+  var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
+  console.log(chosen_room);
+  if(chosen_room !==undefined){
+    if (chosen_room.player1 === querystring.parse(idpath)["user"]){
+      console.log(chosen_room.player1);
+      chosen_room.player1 ='';
+      response.writeHead(200, { "Content-Type": "text/html" });
+    }
+    else if (chosen_room.player2 === querystring.parse(idpath)["user"]){
+      console.log(chosen_room.player2);
+      chosen_room.player2 ='';
+      response.writeHead(200, { "Content-Type": "text/html" });
+    }
+    else {
+      console.log("no encontrado");
+      response.writeHead(404, { "Content-Type": "text/html" });
+    }
+
+  }else{
+    response.writeHead(404, { "Content-Type": "text/html" });
+  }
+  response.end();
+
+}
+
+function ocupationcheck(response, postData, idpath) {
+  var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
+  if( chosen_room != undefined){
+    if (chosen_room.player1 != '' && chosen_room.player2 != '') {
+      response.writeHead(403, { "Content-Type": "text/html" });
+    }
+    else if (chosen_room.player1 == '' && chosen_room.player2 == '') {
+      response.writeHead(200, { "Content-Type": "text/html" });
+    }
+    else {
+      response.writeHead(201, { "Content-Type": "text/html" });
+    }
+  }else{
+    response.writeHead(404, { "Content-Type": "text/html" });
+  }
+
+  response.end();
+
+}
+
+function ocupation(response, postData, idpath) {
+
+  var chosen_room = rooms.find(room => room.number === querystring.parse(idpath)["room"]);
+  if( chosen_room != undefined){
+    if (chosen_room.player1 != '' && chosen_room.player2 != '') {
+      response.writeHead(404, { "Content-Type": "text/html" });
+    }
+    else {
+      if(chosen_room.player1 === '') {
+        chosen_room.player1 = querystring.parse(idpath)["user"]
+      }
+      else{
+        chosen_room.player2 = querystring.parse(idpath)["user"]
+      }
+
+      response.writeHead(200, { "Content-Type": "text/html" });
+    }
+  }else{
+    response.writeHead(404, { "Content-Type": "text/html" });
+  }
+  response.end();
+}
+
+function serveImg(response, postData, idpath) {
+
+  let img = "src/assets/avatars/guerrera.png"
+  if (idpath === "2") {
+    img = "src/assets/avatars/guerrero.png"
+  }
+  if (idpath === "3") {
+    img = "src/assets/avatars/arquera.png"
+  }
+  if (idpath === "4") {
+    img = "src/assets/avatars/arquero.png"
+  }
+  if (idpath === "5") {
+    img = "src/assets/avatars/maga.png"
+  }
+  if (idpath === "6") {
+    img = "src/assets/avatars/mago.png"
+  }
+  if (idpath === "7") {
+    img = "src/assets/avatars/monstrua.png"
+  }
+  if (idpath === "8") {
+    img = "src/assets/avatars/monstruo.png"
+  }
+  fs.readFile(img, function (err, data) {
+    if (err) {
+      console.log(err)
+      throw err;
+    }
+
+    response.writeHead(200, { "Content-Type": "image/jpeg" });
+    response.write(data);
+    response.end();
+  })
+}
+
 exports.init = init;
 exports.login = login;
 exports.register = register;
 exports.validatedRegister = validatedRegister;
 exports.logOut = logOut;
+exports.gameApp = gameApp;
+exports.serveImg = serveImg;
+exports.ocupation = ocupation;
+exports.disconnect = disconnect;
+exports.ocupationcheck = ocupationcheck;
