@@ -4,10 +4,10 @@ var requestHandlers = require("./src/controler/requesthandler");
 
 var handle = {};
 handle["/"] = requestHandlers.init;
-handle["/home"] =requestHandlers.init;
+handle["/landing"] =requestHandlers.init;
 handle["/register"]=requestHandlers.register;
 handle["/login"]=requestHandlers.login;
-handle["/game-app"]=requestHandlers.gameApp;
+handle["/dashboard"]=requestHandlers.gameApp;
 handle["/validated-register"]=requestHandlers.validatedRegister;
 handle["/assets/avatars"]= requestHandlers.serveImg;
 handle["/ocupation"]= requestHandlers.ocupation;

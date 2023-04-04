@@ -12,7 +12,7 @@
             <div class="wrapper-content">
                 <div id="helper" class="helper-wrapper">
                     <div class="helper-content">
-                        <p>The username or password is incorrect or the user doesnt exists</p>
+                        <p>El usuario o la contraseña son incorrectos o el usuario no está registrado</p>
                     </div>
                 </div>
 
@@ -63,7 +63,7 @@
                         user.isLogged= true;
                         localStorage.setItem('User', JSON.stringify(user))
 
-                        fetch('/game-app').then(response => {
+                        fetch('/dashboard').then(response => {
                             window.location.assign(response.url)
                         })
                     } else {

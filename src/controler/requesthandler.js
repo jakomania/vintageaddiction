@@ -112,7 +112,7 @@ function logOut(response, postData, idpath){
 
   });
 
-  fs.readFile("public/views/home.html", function (err, data) {
+  fs.readFile("public/views/landing.html", function (err, data) {
     if (err) {
       throw err;
     }
@@ -123,7 +123,7 @@ function logOut(response, postData, idpath){
 }
 
 function gameApp(response) {
-  fs.readFile("public/views/game-app.html", function (err, data) {
+  fs.readFile("public/views/dashboard.html", function (err, data) {
     if (err) {
       throw err;
     }
