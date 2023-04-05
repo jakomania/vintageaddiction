@@ -65,18 +65,26 @@
                     <label class="form-label" for="typePasswordX-2">Password</label>
                   </div>                  
 
-                  <div class="form-outline mb-4">
+                  <!-- <div class="form-outline mb-4">
                     <input type="number" name="room" id="room" class="form-control form-control-lg" />
                     <label class="form-label" for="typePasswordX-2">Favorite room</label>
-                  </div>                  
+                  </div>                   -->
+                  
+                  <select name="room" id="room" class="form-select" aria-label="Default select example">
+                    <option selected value="1" >Room 1</option>
+                    <option value="2" >Room 2</option>
+                    <option value="3" >Room 3</option>
+                    <option value="4" >Room 4</option>
+                  </select>
+                  <label class="form-label">Favorite Room</label>
 
                   
                     <input type="hidden" name="avatar" id="avatar" />
                   
                   
                   <div class="col-sm">
-                    <label>Choose Avatar</label>    
-                    <div id="registerAvatar" class="d-flex flex-wrap justify-content-space-between">                            
+                    
+                    <div id="registerAvatar" class="d-flex flex-wrap justify-content-space-between" style="margin-top: 30px;">                            
                         <img id="t1" name="avatars" onclick="getAvatar('t1')" src="punk01.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
                         <img id="t2" name="avatars" onclick="getAvatar('t2')" src="punk02.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
                         <img id="t3" name="avatars" onclick="getAvatar('t3')" src="punk03.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
@@ -85,11 +93,13 @@
                         <img id="t6" name="avatars" onclick="getAvatar('t6')" src="punk06.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
                         <img id="t7" name="avatars" onclick="getAvatar('t7')" src="punk07.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />
                         <img id="t8" name="avatars" onclick="getAvatar('t8')" src="punk08.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />                        
+                        <img id="t9" name="avatars" onclick="getAvatar('t9')" src="punk09.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />                        
+                        <img id="t10" name="avatars" onclick="getAvatar('t10')" src="punk10.png" class="rounded-circle" style="width: 75px;" alt="Avatar"  />                        
                     </div>
-                </div>
-                <br>
+                </div>                
+                <label>Choose Avatar</label>  <br>  
 
-                  <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>  
+                  <button class="btn btn-primary btn-lg btn-block" type="submit" style="margin-top: 30px;">Submit</button>  
                   
                 </form>                                            
       
