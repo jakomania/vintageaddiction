@@ -12,7 +12,7 @@ usersDb = [
 
 
 roomData = {
-   room01: [ 'player1', 'player2'] ,
+   room01: [] ,
    room02: [] ,
    room03: [] ,
    room04: [] ,

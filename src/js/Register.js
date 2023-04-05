@@ -4,8 +4,7 @@ const { usersDb } = require('./storage.js');
 class Register {
 
   fields = {};
-  errors = {};
-  //storage = new LocalStorage();
+  errors = {};  
 
   constructor(formFields) {
     this.username = formFields.username;

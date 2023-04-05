@@ -19,7 +19,7 @@ class Player {
 
     checkRoomPlayers()
     {   
-        console.log( 'El numero de usuarios es: ' + roomData[this.room].length );
+        //console.log( 'El numero de usuarios es: ' + roomData[this.room].length );
         if ( roomData[this.room].length < 2 )
         {
             return true;
@@ -50,6 +50,16 @@ class Player {
             return false;
         }
         
+    }
+
+    getRoomData()
+    {
+        return roomData[this.room];
+    }
+
+    getRoom()
+    {
+        return this.room;
     }
 
 
