@@ -141,8 +141,22 @@ module.exports = {
           let exists = register.checkEmail();
           if ( !exists )
           {
-            register.registerUser();          
-            res.end( 'User registered!' );
+            register.registerUser();                      
+            fs.readFile( 
+              'templates/success_reg.html', ( err, data ) => 
+            {
+              if ( err ) 
+              {
+                const msgError = "Page load error"
+                console.log( msgError );
+                res.end( msgError );        
+                return;
+              } 
+              else 
+              {           
+                res.end(data);
+              };          
+            })
           }
           else 
           {
@@ -206,44 +220,28 @@ module.exports = {
         });
     },
             
-     
-  //Register route
-  // renderRoom: function ( req, res )
-  // {       
-  //     let body = '';
-  //     req.on('data', chunk => 
+  //   renderSuccessReg: function ()
+  //   {       
   //     {
-  //       body += chunk.toString(); // convert Buffer to string
-  //     }); 
-  //     req.on('end', () => 
-  //     {
-  //         console.log( parse( body ) );
-  //         let player = new Player( parse( body ) );          
-
-  //         if ( player.addPlayer2Room() )
+  //       fs.readFile( 
+  //         'templates/success_reg.html', ( err, data ) => 
+  //       {
+  //         if ( err ) 
   //         {
-  //           fs.readFile( 
-  //             'templates/room.html', ( err, data ) => 
-  //             {
-  //               if ( err ) 
-  //               {
-  //                 const msgError = "Room load error"
-  //                 console.log( msgError );
-  //                 res.end( msgError )
-  //                 return;
-  //               }
-  //               res.end( data )
-  //             })
-  //         }
-  //         else
-  //         {
-  //           res.end( 'La sala está completa' );  
-  //         }
-                                                                      
-  //     });    
-  //   } 
-}         
+  //           const msgError = "Page load error"
+  //           console.log( msgError );
+  //           res.end( msgError );        
+  //           return;
+  //         } 
+  //         else 
+  //         {           
+  //           return data;
+  //         };          
+  //       })
+  //     }             
+  // }         
 
+}
   
 
   

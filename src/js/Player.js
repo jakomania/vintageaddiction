@@ -19,37 +19,33 @@ class Player {
 
     checkRoomPlayers()
     {   
-        //console.log( 'El numero de usuarios es: ' + roomData[this.room].length );
+        //console.log( 'Jugadores en la sala: ' + roomData[this.room].length );
         if ( roomData[this.room].length < 2 )
-        {
-            return true;
-        }
+        { return true; }
         else
-        {
-            return false;
-        }
-
+        { return false; }
     }
 
     addPlayer2Room() 
     {        
-        if (this.checkRoomPlayers())
+        var playersNumber = this.checkRoomPlayers();
+        var playerPresent = this.compareUsers();
+
+        if ( playersNumber && !playerPresent )
         {
             roomData[this.room].push({
                 player: this.player,
                 avatar: this.avatar,
             }            
-            );
-            console.log(roomData[this.room]);
-            console.log('Jugador en la sala!')
+            );            
+            console.log('El hugador ' + this.player + ' ha entradao en la sala ' + this.room )
             return true;
         }
         else 
         {
-            console.log('La sala está completa')
+            console.log('Ya estas en la sala o la sale está completa')
             return false;
-        }
-        
+        }       
     }
 
     getRoomData()
@@ -57,14 +53,28 @@ class Player {
         return roomData[this.room];
     }
 
+
     getRoom()
     {
         return this.room;
     }
 
 
+    compareUsers()
+    {
+        var players = this.getRoomData();
+        var isPresent = false;
 
-
+        players.forEach(element => 
+            {
+                if ( element.player == this.player)
+                { isPresent = true }
+                
+            });
+        
+        return isPresent;
+    }
 }
+
 
 module.exports = { Player }
