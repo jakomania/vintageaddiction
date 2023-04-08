@@ -4,6 +4,13 @@ const Room = require('../model/room')
 const Player = require('../model/player');
 
 var userRegisters = new Array();
+var rooms = new Array();
+let room1 = new Room("room1", "Room 1", "", "");
+let room2 = new Room("room2", "Room 2", "", "");
+let room3 = new Room("room3", "Room 3", "", "");
+rooms.push(room1);
+rooms.push(room2);
+rooms.push(room3);
 //Home route
 function init(response) {
 
@@ -205,27 +212,27 @@ function ocupation(response, postData, idpath) {
 
 function serveImg(response, postData, idpath) {
 
-  let img = "src/assets/avatars/guerrera.png"
+  let img = "src/assets/avatars/avatar1.png"
   if (idpath === "2") {
-    img = "src/assets/avatars/guerrero.png"
+    img = "src/assets/avatars/avatar2.png"
   }
   if (idpath === "3") {
-    img = "src/assets/avatars/arquera.png"
+    img = "src/assets/avatars/avatar3.png"
   }
   if (idpath === "4") {
-    img = "src/assets/avatars/arquero.png"
+    img = "src/assets/avatars/avatar4.png"
   }
   if (idpath === "5") {
-    img = "src/assets/avatars/maga.png"
+    img = "src/assets/avatars/avatar5.png"
   }
   if (idpath === "6") {
-    img = "src/assets/avatars/mago.png"
+    img = "src/assets/avatars/avatar6.png"
   }
   if (idpath === "7") {
-    img = "src/assets/avatars/monstrua.png"
+    img = "src/assets/avatars/avatar7.png"
   }
   if (idpath === "8") {
-    img = "src/assets/avatars/monstruo.png"
+    img = "src/assets/avatars/avatar8.png"
   }
   fs.readFile(img, function (err, data) {
     if (err) {
