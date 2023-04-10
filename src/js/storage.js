@@ -1,16 +1,30 @@
 
 
-usersDb = [
+let usersDb = [
     {
     username: 'admin',
     email: 'admin@gmail.com',
-    password: 'cisco',
-    room: '6',
-    avatar: 'bat'
+    password: '1234',
+    room: '1',
+    avatar: 'punk05.png'
+    },
+    {
+    username: 'student',
+    email: 'estudent@gmail.com',
+    password: '1234',
+    room: '1',
+    avatar: 'punk04.png'
     },
   ];
 
-connected_users = [];
 
-module.exports = { usersDb, connected_users };
+let roomData = {
+   room01: [] ,
+   room02: [] ,
+   room03: [] ,
+   room04: [] ,
+}
+
+
+module.exports = { usersDb, roomData };
 
