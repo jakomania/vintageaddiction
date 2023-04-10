@@ -5,38 +5,141 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vintage Addiction</title>
+    <link rel="stylesheet" href="css.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 </head>
+
+
 <body>
-    <nav>
-        <ul>
-            <li>
-                <a href="/login">Login</a>
-            </li>
-            <li>
-                <a href="/register">Register</a>
-            </li>
-            <li>
-                <a href="/">Home</a>
-            </li>
-        </ul>        
-    </nav>
-<body>  
 
-  <h1>VINTAGE ADDICTION</h1>
-  <h2 id="user"></h2>
+<header>
+  <nav class="navbar bg-body-tertiary fixed-top " style="background-color: #480b97 !important;">
+    <div class="container col-12 col-md-12 col-lg-12 col-xl-12">
+      <a class="navbar-brand" href="/index"><img class="logo" src="logo.png"/></a>
+      <a onclick="logOut()" class="nav-link" href="/index"><i class="fi fi-br-address-card white" style="font-size:28px;"></i></a>
+    </div>
+  </nav>
+</header>
 
-  <p id="avatar"></p>
-  <p id="room"></p>
+<div class="container col-12 col-md-12 col-lg-12 col-xl-12 " style="margin-top: 120px;">
 
+  <div class="row justify-content-md-center white">
+    <div class="col">
+      <h2 id="user"></h2>
+    </div>
+  </div>
+
+  <div class="row justify-content-md-center white">
+    <div class="col ">
+      <p id="room"></p>
+    </div>
+  </div>
+
+  <div draggable="true" class="row justify-content-center">
+    <img  id="avatar" style="width: 100px;" alt="Avatar"  />
+  </div>
+
+  <div class="row justify-content-center text-center white rowdash" >
+    <h2 style="font-weight: 700">Chose your room!</h2>
+    <p style="font-weight: 300">To chose your room drag your avatar to the room's number :)</p>
+  </div>
+
+  <div class="row justify-content-center rowdash">
+    <img id="room01" name="rooms" src="room01.png" alt="Room"  />
+    <img id="room02" name="rooms" src="room02.png" alt="Room"  />
+    <img id="room03" name="rooms" src="room03.png" alt="Room"  />
+    <img id="room04" name="rooms" src="room04.png" alt="Room"  />
+  </div>
+
+</div>
+
+<form id="postdata" action="/room" method="post">
+  <input type="hidden" name="player"  />
+  <input type="hidden" name="avatar"  />
+  <input type="hidden" name="room"  />
+</form>
 
 
   <script>
+
+    //Personalize dashboard with cookie data
     const obj = JSON.parse( document.cookie );
     document.getElementById( "user" ).innerHTML = obj.username.toUpperCase() + " DASHBOARD";
-    document.getElementById( "avatar" ).innerHTML = obj.avatar.toUpperCase();
     document.getElementById( "room" ).innerHTML = "FAVORITE ROOM " + obj.room.toUpperCase();
+
+    const img = document.getElementById( "avatar" );
+    img.src = obj.avatar;
+
+    //Set cookie in localStorage
     localStorage.setItem( 1, document.cookie ); 
-    console.log( 'Nuestra data es: ' + localStorage.getItem( 1 ) );         
+
+    //Add drag & drop capabilties
+    img.addEventListener('dragstart', dragStart);
+
+    function dragStart(e) 
+    {        
+        e.dataTransfer.setData('text/plain', e.target.id);
+        setTimeout(() => 
+        {
+            e.target.classList.add('hide');
+        }, 0);
+    }
+
+    const rooms = document.getElementsByName("rooms");
+
+    rooms.forEach(room => 
+    {
+        room.addEventListener('dragenter', dragEnter)
+        room.addEventListener('dragover', dragOver);
+        room.addEventListener('dragleave', dragLeave);
+        room.addEventListener('drop', drop);
+
+    });
+
+    function dragEnter(e) 
+    {
+        e.preventDefault();
+        e.target.classList.add('drag-over');
+
+    }
+
+    function dragOver(e) 
+    {
+        e.preventDefault();
+        e.target.classList.add('drag-over');
+    }
+
+    function dragLeave(e) 
+    {
+        e.target.classList.remove('drag-over');
+        
+    }
+
+    function drop(e) 
+    {        
+        const form  = document.getElementById('postdata');
+
+        form.elements['player'].value = obj.username;
+        form.elements['avatar'].value = obj.avatar;
+        form.elements['room'].value = e.target.id;        
+        
+        form.submit();
+    }
+
+    function logOut() 
+    {
+      localStorage.removeItem("myToken");
+      location.replace("/index")
+    }
+
 </script>
+
+
 </body>
 </html>
+
